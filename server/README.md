@@ -1,4 +1,5 @@
-# Demo server code for MP3
+# 5Beats Server
+
 You should be able to do
 `npm install` and `nodemon server.js`
 
