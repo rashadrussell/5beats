@@ -1,0 +1,35 @@
+<div class="addUser" ng-controller='AddUserController'>	
+  
+  <section class="viewHeader row">	
+    <div class="large-9 columns">
+      <h2>Add User</h2>
+    </div>
+  </section>
+
+  <section class="content">
+    <form data-abide>
+    	<div class="row">
+    		<div class="large-6 columns">
+    			<label>Name <span class="required">*</span>
+    				<input type="text" placeholder="Name" ng-model="newUserName" required/>
+    			</label>
+    		</div>
+    	</div>
+
+    	<div class="row">
+    		<div class="large-6 columns">
+    			<label>Email <span class="required">*</span>
+    				<input type="email" placeholder="Email" ng-model="newEmailName" required/>
+    			</label>
+    		</div>
+    	</div>
+
+    	<div class="row">
+    		<div class="large-6 columns ">
+    			<button ng-click="addUser(newUserName, newEmailName)" class="tiny radius">Send</button>
+    		</div>
+    	</div>
+    </form>
+  <section>
+
+</div>
