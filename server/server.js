@@ -7,6 +7,38 @@ var router = express.Router();
 //replace this with your Mongolab URL
 mongoose.connect('');
 
+
+var songSchema = new Schema({
+  title:  		{type: String, required: true},
+  artist: 		{type: String, required: true},
+  album: 		{type: String, required: false, default:''},
+  releaseDate: 	{type: Date, required:false},
+  trackNumber: 	{type: Number, required: false, default:0},
+  uploaderID: 	{type: String, required: true},
+  isPublic: 	{type: Boolean, required: true}
+});
+
+
+var userSchema = new Schema({
+	userName: 		{type: String, required:true, unique:true},
+	imageURL: 		{type: String, required:false},
+	email: 			{type: String, required:true, unique:true}
+});
+
+
+
+var messageSchema = new Schema({
+	sourceUserID: 	{type: String, required: true},
+	destUserID: 	{type: String, required: true},
+	message: 		{type: String, required: true},
+	timestamp: 		{type: Date, required: true}
+});
+
+var friendSchema = new Schema({
+  user1:  {type: String, required: true},
+  user2:  {type:String, required: true}
+});
+
 // Create our Express application
 var app = express();
 
