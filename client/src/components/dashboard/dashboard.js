@@ -5,7 +5,10 @@ angular.module('5BeatsApp')
     $stateProvider
       .state('dashboard', {
         url: '/dashboard',
-        templateUrl: './dashboard.html',
-        controller: 'DashboardCtrl'
+        templateUrl: 'components/dashboard/dashboard.html',
+        controller: 'DashboardCtrl',
+        data: {
+        	css: 'assets/stylesheets/components/dashboard/dashboard.css'
+        }
       });
   });

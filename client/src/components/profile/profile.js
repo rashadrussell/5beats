@@ -5,7 +5,10 @@ angular.module('5BeatsApp')
     $stateProvider
       .state('profile', {
         url: '/profile',
-        templateUrl: './profile.html',
-        controller: 'ProfileCtrl'
+        templateUrl: 'components/profile/profile.html',
+        controller: 'ProfileCtrl',
+        data: {
+        	css: 'assets/stylesheets/components/profile/profile.css'
+        }
       });
   });

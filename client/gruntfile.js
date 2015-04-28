@@ -11,26 +11,14 @@ module.exports = function(grunt) {
         options: {
           mangle: false
         },
-        files: {
-          'build/components/home.js': ['src/components/home.js'],
-          'build/components/home.controller.js': ['src/components/home.controller.js'],
-          'build/components/dashboard.js': ['src/components/dashboard.js'],
-          'build/components/dashboard.controller.js': ['src/components/dashboard.controller.js'],
-          'build/components/profile.js': ['src/components/profile.js'],
-          'build/components/profile.controller.js': ['src/components/profile.controller.js'],
-          'build/components/upload.js': ['src/components/upload.js'],
-          'build/components/upload.controller.js': ['src/components/upload.controller.js'],
-        } //files
+        files: [{
+            expand : true,
+            cwd    : './src',
+            src    :  ***.js,
+            dest   : build/
+        }] //files
       } //my_target
     }, //uglify*/
-    copy: {
-      files: {
-            expand : true,
-            cwd    : './',
-            src    : './src/**',
-            dest   : 'build/'
-      }
-    },
     compass: {
       dev: {
         options: {
@@ -48,24 +36,24 @@ module.exports = function(grunt) {
       options: { livereload: true },
       scripts: {
         files: [
+                  'src/*.js',
                   'src/components/home/*.js',
                   'src/components/dashboard/*.js',
                   'src/components/profile/*.js',
                   'src/components/upload/*.js'
                 ],
         //tasks: ['clean','uglify'],
-        tasks: ['copy']
+        //tasks: ['copy']
       }, //script
       sass: {
         files: [
-                  'src/components/home.scss',
-                  'src/components/dashboard.scss',
-                  'src/components/profile.scss',
-                  'src/components/upload.scss'
+                  'src/components/home/home.scss',
+                  'src/components/dashboard/dashboard.scss',
+                  'src/components/profile/profile.scss',
+                  'src/components/upload/upload.scss'
                 ],
         tasks: [
                   'compass:dev',
-                  'compass:foundation'
                 ]
       }, //sass
       sass_foundation: {
@@ -78,10 +66,11 @@ module.exports = function(grunt) {
       }, //sass_foundation
       html: {
         files: [
-                  'src/components/home.html',
-                  'src/components/dashboard.html',
-                  'src/components/profile.html',
-                  'src/components/upload.html',
+                  'src/*.html',
+                  'src/components/home/home.html',
+                  'src/components/dashboard/dashboard.html',
+                  'src/components/profile/profile.html',
+                  'src/components/upload/upload.html',
                   'src/shared/directives/*.html', 
                   'src/partials/*.html'
                 ]

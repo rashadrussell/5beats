@@ -5,7 +5,10 @@ angular.module('5BeatsApp')
     $stateProvider
       .state('upload', {
         url: '/upload',
-        templateUrl: './upload.html',
-        controller: 'UploadCtrl'
+        templateUrl: 'components/profile/profile.html',
+        controller: 'UploadCtrl',
+        data: {
+        	css: 'assets/stylesheets/components/upload/upload.css'
+        }
       });
   });

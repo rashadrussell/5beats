@@ -5,7 +5,10 @@ angular.module('5BeatsApp')
     $stateProvider
       .state('home', {
         url: '/home',
-        templateUrl: './home.html',
-        controller: 'HomeCtrl'
+        templateUrl: 'components/home/home.html',
+        controller: 'HomeCtrl',
+        data: {
+        	css: 'assets/stylesheets/components/home/home.css'
+        }
       });
   });
