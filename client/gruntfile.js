@@ -4,32 +4,21 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-compass');
   grunt.loadNpmTasks('grunt-express-server');
   grunt.loadNpmTasks('grunt-contrib-copy');
-  grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.initConfig({
-    clean: ["public/js"],
+    /*
     uglify: {
       my_target: {
         options: {
           mangle: false
         },
-        files: {
-          'public/js/script.js': ['js/script.js'],
-          'public/js/controllers.js': ['js/controllers.js'],
-          'public/js/app.js': ['js/app.js'],
-          'public/js/services.js': ['js/services.js']
-        } //files
-      } //my_target
-    }, //uglify
-    copy: {
-      files: {
+        files: [{
             expand : true,
-            dest   : 'public/js',
-            cwd    : 'js',
-            src    : [
-              '**/*.js'
-            ]
-      }
-    },
+            cwd    : './src',
+            src    :  ***.js,
+            dest   : build/
+        }] //files
+      } //my_target
+    }, //uglify*/
     compass: {
       dev: {
         options: {
@@ -46,20 +35,45 @@ module.exports = function(grunt) {
     watch: {
       options: { livereload: true },
       scripts: {
-        files: ['js/*.js'],
+        files: [
+                  'src/*.js',
+                  'src/components/home/*.js',
+                  'src/components/dashboard/*.js',
+                  'src/components/profile/*.js',
+                  'src/components/upload/*.js'
+                ],
         //tasks: ['clean','uglify'],
-        tasks: ['copy']
+        //tasks: ['copy']
       }, //script
       sass: {
-        files: ['sass/*.scss'],
-        tasks: ['compass:dev','compass:foundation']
+        files: [
+                  'src/components/home/home.scss',
+                  'src/components/dashboard/dashboard.scss',
+                  'src/components/profile/profile.scss',
+                  'src/components/upload/upload.scss'
+                ],
+        tasks: [
+                  'compass:dev',
+                ]
       }, //sass
       sass_foundation: {
-        files: ['public/foundation/scss/foundation.scss','public/foundation/scss/foundation/*.scss','public/foundation/scss/foundation/components/*.scss'],
+        files: [
+                  'src/assets/vendor/foundation/scss/foundation.scss',
+                  'src/assets/vendor/foundation/scss/foundation/*.scss',
+                  'src/assets/vendor/foundation/scss/foundation/components/*.scss'
+                ],
         tasks: ['compass:foundation']
       }, //sass_foundation
       html: {
-        files: ['public/*.html', 'public/partials/*.html']
+        files: [
+                  'src/*.html',
+                  'src/components/home/home.html',
+                  'src/components/dashboard/dashboard.html',
+                  'src/components/profile/profile.html',
+                  'src/components/upload/upload.html',
+                  'src/shared/directives/*.html', 
+                  'src/partials/*.html'
+                ]
       }
     }, //watch
     express: {
@@ -68,7 +82,7 @@ module.exports = function(grunt) {
       },
       dev: {
         options: {
-          script: 'app.js'
+          script: 'server.js'
         }
       }
   }
