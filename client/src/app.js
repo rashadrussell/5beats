@@ -6,10 +6,11 @@ angular.module('5BeatsApp', [
 ])
   .config(function ($stateProvider, $urlRouterProvider, $locationProvider) {
     $urlRouterProvider
-      .otherwise('/dashboard');
+      .otherwise('/');
 
     $locationProvider.html5Mode({
 	  enabled: true,
 	  requireBase: false
 	});
-  });
+});
+
