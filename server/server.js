@@ -98,6 +98,67 @@ function onSave(res) {
 	}
 }
 
+function onGetMany(res, countQuery){
+	return function(err, data){
+		if(err){
+			res.status(500);
+			res.json({message: String(err), data:[]});
+		}
+
+		else{
+			if(countQuery){
+				res.status(200);
+				res.json({ message: 'OK', data: data.length});
+			}
+
+			else{
+				res.status(200);
+				res.json({ message: 'OK', data: data});
+			}
+		}
+	}
+}
+
+function getAndFilterResults(req, res, schema){
+	var whereQuery = {};
+	var sortQuery = {};
+	var selectQuery = {};
+	var skipQuery = {};
+	var limitQuery = {};
+	var countQuery = false;
+
+	if(req.query.where){
+		whereQuery = JSON.parse(req.query.where);
+	}
+
+	if(req.query.sort){
+		sortQuery = JSON.parse(req.query.sort);
+	}
+
+	if(req.query.select){
+		selectQuery = JSON.parse(req.query.select);
+	}
+
+	if(req.query.skip){
+		skipQuery = JSON.parse(req.query.skip);
+	}
+
+	if(req.query.limit){
+		limitQuery = JSON.parse(req.query.limit);
+	}
+
+	if(req.query.count && (req.query.count == "true" || req.query.count == 1)){
+		countQuery = true;
+	}
+
+	schema.find(whereQuery)
+	.sort(sortQuery)
+	.select(selectQuery)
+	.skip(skipQuery)
+	.limit(limitQuery)
+	.exec(onGetMany(res, countQuery));
+}
+
 
 // Start the server
 app.listen(port);
@@ -148,13 +209,12 @@ friendLookupRoute.options(function(req, res){
 });
 
 
-//POST Fields
+//POST Methods
 
 usersRoute.post(function(req, res){
-	console.log( req.body);
 	var newUser = new User(req.body);
 
-	console.log("Got PUT for /users");
+	console.log("Got POST for /users");
 
 	newUser.save(onSave(res));
 });
@@ -162,7 +222,7 @@ usersRoute.post(function(req, res){
 songsRoute.post(function(req, res){
 	var newSong = new Song(req.body);
 
-	console.log("Got PUT for /songs");
+	console.log("Got POST for /songs");
 
 	newSong.save(onSave(res));
 });
@@ -170,7 +230,7 @@ songsRoute.post(function(req, res){
 messagesRoute.post(function(req, res){
 	var newMessage = new Message(req.body);
 
-	console.log("Got PUT for /messages");
+	console.log("Got POST for /messages");
 
 	newMessage.save(onSave(res));
 });
@@ -178,10 +238,34 @@ messagesRoute.post(function(req, res){
 friendsRoute.post(function(req, res){
 	var newFriend = new Friend(req.body);
 
-	console.log("Got PUT for /friends");
+	console.log("Got POST for /friends");
 
 	newFriend.save(onSave(res));
 });
+
+//GET Methods
+
+usersRoute.get(function(req, res){
+	console.log("Got GET for /users");
+	getAndFilterResults(req, res, User);
+});
+
+songsRoute.get(function(req, res){
+	console.log("Got GET for /songs");
+	getAndFilterResults(req, res, Song);
+});
+
+messagesRoute.get(function(req, res){
+	console.log("Got GET for /messages");
+	getAndFilterResults(req, res, Message);
+});
+
+friendsRoute.get(function(req, res){
+	console.log("Got GET for /friends");
+	getAndFilterResults(req, res, Friend);
+});
+
+
 
 
 
