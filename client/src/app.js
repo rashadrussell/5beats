@@ -12,4 +12,5 @@ angular.module('5BeatsApp', [
 	  enabled: true,
 	  requireBase: false
 	});
-  });
+});
+

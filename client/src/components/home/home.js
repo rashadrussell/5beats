@@ -8,7 +8,7 @@ angular.module('5BeatsApp')
         templateUrl: 'components/home/home.html',
         controller: 'HomeCtrl',
         data: {
-        	css: 'assets/stylesheets/components/home/home.css'
+        	css: 'assets/stylesheets/components/home/scss/home.css'
         }
       });
   });

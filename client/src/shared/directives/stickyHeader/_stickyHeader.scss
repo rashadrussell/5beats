@@ -1,0 +1,16 @@
+.main-header {
+	width: 100%;
+	padding: 10px 10px;
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: 99999;
+	background: $darkGrey;
+	box-shadow: 0 0 10px $black;
+
+	.logo {
+		padding: 0;
+		margin: 0;
+		color: $white;
+	}
+}

@@ -3,17 +3,24 @@
 <head>
 	<title>5Beats</title>
 	<link rel="stylesheet" href="./assets/vendor/foundation/css/foundation.css">
+	<link rel="stylesheet" href="./assets/stylesheets/app.css">
 </head>
 <body>
 
-<div ui-view></div>
+<header sticky-header></header>
+<main ui-view></main>
+<sidebar></sidebar>
 
+
+<!-- Include Assets -->
 <script src="./assets/vendor/angular/angular.js"></script>
 <script src="./assets/vendor/angular-ui-router/release/angular-ui-router.js"></script>
 <script src="./assets/vendor/angular-ui-router-styles/ui-router-styles.js"></script>
 
 
 <script src="./app.js"></script>
+
+<!-- Include Components -->
 <script src="./components/home/home.controller.js"></script>
 <script src="./components/home/home.js"></script>
 <script src="./components/dashboard/dashboard.controller.js"></script>
@@ -22,6 +29,13 @@
 <script src="./components/profile/profile.js"></script>
 <script src="./components/upload/upload.controller.js"></script>
 <script src="./components/upload/upload.js"></script>
+
+
+<!-- Include Directives -->
+<script src="./shared/directives/stickyHeader/stickyHeader.js"></script>
+<script src="./shared/directives/sidebar/sidebar.js"></script>
+
+
 <script src="http://localhost:35729/livereload.js"></script>
 </body>
 </html>
