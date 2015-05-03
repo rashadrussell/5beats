@@ -78,10 +78,10 @@ var songsRoute = router.route('/songs');
 var messagesRoute = router.route('/messages');
 var friendsRoute = router.route('/friends');
 
-var userLookupRoute = router.route('/users/:userID');
-var songLookupRoute = router.route('/songs/:songID');
-var messageLookupRoute = router.route('/messages/:messageID');
-var friendLookupRoute = router.route('/friends/:friendID');
+var userLookupRoute = router.route('/users/:objectid');
+var songLookupRoute = router.route('/songs/:objectid');
+var messageLookupRoute = router.route('/messages/:objectid');
+var friendLookupRoute = router.route('/friends/:objectid');
 
 //General purpose callbacks
 
@@ -157,6 +157,29 @@ function getAndFilterResults(req, res, schema){
 	.skip(skipQuery)
 	.limit(limitQuery)
 	.exec(onGetMany(res, countQuery));
+}
+
+function lookupItem(req, res, schema) {
+	if(isNaN(parseInt(req.params.objectid))){
+		res.status(404);
+		res.json({message: "Item not found", data:[]});
+		return;
+	}
+
+	schema.find({_id: req.params.objectid}, function(err, object){
+		if(err){
+			res.status(500);
+			res.json({message: String(err), data:[]});
+		}
+		else if(object.length === 0){
+			res.status(404);
+			res.json({message: "Item not found", data:[]});
+		}
+		else{
+			res.status(200);
+			res.json({ message: 'OK', data: object[0]});
+		}
+	});
 }
 
 
@@ -243,7 +266,7 @@ friendsRoute.post(function(req, res){
 	newFriend.save(onSave(res));
 });
 
-//GET Methods
+//GET Methods (many results)
 
 usersRoute.get(function(req, res){
 	console.log("Got GET for /users");
@@ -265,6 +288,28 @@ friendsRoute.get(function(req, res){
 	getAndFilterResults(req, res, Friend);
 });
 
+
+//Get Methods (single result)
+
+userLookupRoute.get(function(req, res){
+	console.log("Got GET for /users/"+req.params.objectid);
+	lookupItem(req, res, User);
+});
+
+songLookupRoute.get(function(req, res){
+	console.log("Got GET for /songs/"+req.params.objectid);
+	lookupItem(req, res, Song);
+});
+
+messageLookupRoute.get(function(req, res){
+	console.log("Got GET for /messages/"+req.params.objectid);
+	lookupItem(req, res, Message);
+});
+
+friendLookupRoute.get(function(req, res){
+	console.log("Got GET for /friends/"+req.params.objectid);
+	lookupItem(req, res, Friend);
+});
 
 
 
