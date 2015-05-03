@@ -205,6 +205,29 @@ function deleteItem(req, res, schema){
 	});
 }
 
+function updateItem(req, res, schema){
+	if(isNaN(parseInt(req.params.objectid))){
+		res.status(404);
+		res.json({message: "Item not found", data:[]});
+		return;
+	}
+
+	schema.update({_id: req.params.objectid}, {$set: req.body}, function(err, object){
+		if(err){
+			res.status(500);
+			res.json({message: String(err), data:[]});
+		}
+		else if(object.length === 0){
+			res.status(404);
+			res.json({message: "Item not found", data:[]});
+		}
+		else{
+			res.status(200);
+			res.json({ message: 'OK', data: object[0]});
+		}
+	});
+}
+
 
 // Start the server
 app.listen(port);
@@ -258,34 +281,26 @@ friendLookupRoute.options(function(req, res){
 //POST Methods
 
 usersRoute.post(function(req, res){
-	var newUser = new User(req.body);
-
 	console.log("Got POST for /users");
-
+	var newUser = new User(req.body);
 	newUser.save(onSave(res));
 });
 
 songsRoute.post(function(req, res){
-	var newSong = new Song(req.body);
-
 	console.log("Got POST for /songs");
-
+	var newSong = new Song(req.body);
 	newSong.save(onSave(res));
 });
 
 messagesRoute.post(function(req, res){
-	var newMessage = new Message(req.body);
-
 	console.log("Got POST for /messages");
-
+	var newMessage = new Message(req.body);
 	newMessage.save(onSave(res));
 });
 
 friendsRoute.post(function(req, res){
-	var newFriend = new Friend(req.body);
-
 	console.log("Got POST for /friends");
-
+	var newFriend = new Friend(req.body);
 	newFriend.save(onSave(res));
 });
 
@@ -354,6 +369,28 @@ messageLookupRoute.delete(function(req, res){
 friendLookupRoute.delete(function(req, res){
 	console.log("Got DELETE for /friends/"+req.params.objectid);
 	deleteItem(req, res, Friend);
+});
+
+//PUT methods
+
+userLookupRoute.put(function(req, res){
+	console.log("Got PUT for /users/"+req.params.objectid);
+	updateItem(req, res, User);
+});
+
+songLookupRoute.put(function(req, res){
+	console.log("Got PUT for /songs/"+req.params.objectid);
+	updateItem(req, res, Song);
+});
+
+messageLookupRoute.put(function(req, res){
+	console.log("Got PUT for /messages/"+req.params.objectid);
+	updateItem(req, res, Message);
+});
+
+friendLookupRoute.put(function(req, res){
+	console.log("Got PUT for /friends/"+req.params.objectid);
+	updateItem(req, res, Friend);
 });
 
 
