@@ -170,7 +170,7 @@ songsRoute.post(function(req, res){
 messagesRoute.post(function(req, res){
 	var newMessage = new Message(req.body);
 
-	console.log("Got PUT for /users");
+	console.log("Got PUT for /messages");
 
 	newMessage.save(onSave(res));
 });
@@ -178,7 +178,7 @@ messagesRoute.post(function(req, res){
 friendsRoute.post(function(req, res){
 	var newFriend = new Friend(req.body);
 
-	console.log("Got PUT for /users");
+	console.log("Got PUT for /friends");
 
 	newFriend.save(onSave(res));
 });
