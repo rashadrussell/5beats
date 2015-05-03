@@ -182,6 +182,29 @@ function lookupItem(req, res, schema) {
 	});
 }
 
+function deleteItem(req, res, schema){
+	if(isNaN(parseInt(req.params.objectid))){
+		res.status(404);
+		res.json({message: "Item not found", data:[]});
+		return;
+	}
+
+	schema.remove({_id: req.params.objectid}, function(err, object){
+		if(err){
+			res.status(500);
+			res.json({message: String(err), data:[]});
+		}
+		else if(object.length === 0){
+			res.status(404);
+			res.json({message: "Item not found", data:[]});
+		}
+		else{
+			res.status(200);
+			res.json({ message: 'OK', data: object[0]});
+		}
+	});
+}
+
 
 // Start the server
 app.listen(port);
@@ -309,6 +332,28 @@ messageLookupRoute.get(function(req, res){
 friendLookupRoute.get(function(req, res){
 	console.log("Got GET for /friends/"+req.params.objectid);
 	lookupItem(req, res, Friend);
+});
+
+//DELETE methods
+
+userLookupRoute.delete(function(req, res){
+	console.log("Got DELETE for /users/"+req.params.objectid);
+	deleteItem(req, res, User);
+});
+
+songLookupRoute.delete(function(req, res){
+	console.log("Got DELETE for /songs/"+req.params.objectid);
+	deleteItem(req, res, Song);
+});
+
+messageLookupRoute.delete(function(req, res){
+	console.log("Got DELETE for /messages/"+req.params.objectid);
+	deleteItem(req, res, Message);
+});
+
+friendLookupRoute.delete(function(req, res){
+	console.log("Got DELETE for /friends/"+req.params.objectid);
+	deleteItem(req, res, Friend);
 });
 
 
