@@ -8,9 +8,9 @@
 </head>
 <body>
 
-<header sticky-header></header>
-<main ui-view></main>
-<sidebar></sidebar>
+<iframe class="mainView" src="./components/home/home.html"></iframe>
+<music-widget class="music-widget"></music-widget>
+
 
 
 <!-- Include Assets -->
@@ -19,23 +19,11 @@
 <script src="./assets/vendor/angular-ui-router-styles/ui-router-styles.js"></script>
 
 
+<!-- Include Components -->
 <script src="./app.js"></script>
 
-<!-- Include Components -->
-<script src="./components/home/home.controller.js"></script>
-<script src="./components/home/home.js"></script>
-<script src="./components/dashboard/dashboard.controller.js"></script>
-<script src="./components/dashboard/dashboard.js"></script>
-<script src="./components/profile/profile.controller.js"></script>
-<script src="./components/profile/profile.js"></script>
-<script src="./components/upload/upload.controller.js"></script>
-<script src="./components/upload/upload.js"></script>
-
-
 <!-- Include Directives -->
-<script src="./shared/directives/stickyHeader/stickyHeader.js"></script>
-<script src="./shared/directives/sidebar/sidebar.js"></script>
-<script src="./shared/directives/musicList/musicList.js"></script>
+
 
 
 <script src="http://localhost:35729/livereload.js"></script>

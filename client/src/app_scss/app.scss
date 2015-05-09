@@ -4,4 +4,19 @@
 @import "../shared/directives/stickyHeader/stickyHeader";
 @import "../shared/directives/sidebar/sidebar";
 @import "../shared/directives/musicList/musicList";
+@import "../shared/directives/musicWidget/musicWidget";
+
+iframe.mainView {
+	width: 80%;
+	height: 100%;
+	border: none;
+}
+
+.music-widget {
+	width: 20%;
+	height: 100%;
+	position:fixed;
+	top: 0;
+	right: 0;
+}
 

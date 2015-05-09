@@ -1,0 +1,72 @@
+.music-list-table {
+	width: 100%;
+	background: transparent;
+	border: none;
+	border-collapse: collapse;
+
+	.music-headers {
+		padding: 10px 10px 10px 50px;
+		border-bottom: solid 1px $dust;
+		background: transparent;
+
+		.music-header {
+			color: $dust;
+		}
+
+		.music-header:not(:last-child) {
+			margin-right: 20%;
+		}
+
+		tr th:first-child {
+			padding-left: 50px;
+		}
+	}
+
+	.music-list {
+		margin: 0;
+		list-style: none;
+
+		.music-row {
+			padding: 5px 5px 5px 50px;
+			background: transparent;
+
+			.music-row-item {
+				border-bottom: solid thin $dust;
+				font-size: 14px;
+				color: $white;
+			}
+
+			.music-row-item:first-child {
+				padding-left: 50px;
+			}
+
+			.music-row-item:not(:last-child) {
+				margin-right: 20%;
+			}
+
+			.play-icon {
+				margin-right: 20px;
+			}
+
+			a:hover {
+				color: $red;
+				text-decoration: none;
+			}
+
+			.uploader {
+				a:hover {
+					text-decoration: none;
+					border-bottom: solid thin $white;
+					color: $white;
+					padding-bottom: 3px;
+				}
+			}	
+		}
+
+		.music-row:hover {
+			background: $dust;
+		}
+	}
+
+	
+}
