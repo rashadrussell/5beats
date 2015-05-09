@@ -10,19 +10,20 @@ var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 
 var songSchema = mongoose.Schema({
+	songURL: 		{type: String, required: true, unique: true},
 	title:  		{type: String, required: true},
 	artist: 		{type: String, required: true},
-	album: 		{type: String, required: false, default:''},
+	album: 			{type: String, required: false, default:'Unknown Album'},
 	releaseDate: 	{type: Date, required:false},
 	trackNumber: 	{type: Number, required: false, default:0},
 	uploaderID: 	{type: String, required: true},
-	isPublic: 	{type: Boolean, required: true}
+	isPublic: 		{type: Boolean, required: true}
 });
 
 
 var userSchema = mongoose.Schema({
 	userName: 		{type: String, required:true, unique:true},
-	imageURL: 		{type: String, required:false},
+	imageURL: 		{type: String, required:false, default: ''},
 	email: 			{type: String, required:true, unique:true}
 });
 
