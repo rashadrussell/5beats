@@ -13,6 +13,7 @@
     "crypto-js": "^3.1.4",
     "express": "^4.12.2",
     "mongoose": "^3.8.24",
+    "passport": "^0.2.1",
     "request": "^2.55.0"
   }
 }

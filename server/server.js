@@ -4,7 +4,28 @@ var mongoose = require('mongoose');
 var bodyParser = require('body-parser');
 var requests = require('request');
 var MD5 = require("crypto-js/md5");
+var mongoose = require('mongoose');
 var router = express.Router();
+
+var passport = require('passport')
+  , LocalStrategy = require('passport-local').Strategy;
+
+
+passport.use(new LocalStrategy(
+  function(username, password, done) {
+    User.findOne({ username: username }, function(err, user) {
+      if (err) { return done(err); }
+      if (!user) {
+        return done(null, false, { message: 'Incorrect username.' });
+      }
+      if (!user.validPassword(password)) {
+        return done(null, false, { message: 'Incorrect password.' });
+      }
+      return done(null, user);
+    });
+  }
+));
+
 //returns and array that contains the [0]=release-date [1]=album_name [2]=genre
 function request_by_title(track){
       track=track.replace(/ /g, "+");
@@ -132,9 +153,17 @@ var songLookupRoute = router.route('/songs/:objectid');
 var messageLookupRoute = router.route('/messages/:objectid');
 var friendLookupRoute = router.route('/friends/:objectid');
 var playlistsLookupRoute = router.route('/playlists/:objectid');
-
+var loginRoute=router.route('/login');
 //General purpose callbacks
-
+loginRoute.post(function(res,req){
+  console.log('hello');
+  });
+// router.route('/login').post(function(res,req){
+//   console.log("i am being called");
+//   passport.authenticate('local', { successRedirect: '/dashboard',
+//                                    failureRedirect: '/login',
+//                                    failureFlash: true });}
+// );
 function onSave(res) {
 	return function(err, savedItem){
 		if (err) {
