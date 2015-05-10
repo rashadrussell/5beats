@@ -3,8 +3,8 @@
 angular.module('5BeatsApp', [
   'ui.router',
   'uiRouterStyles',
-    '5BeatsServices',
-    'flow'
+  '5BeatsServices',
+  'flow'
 ])
   .config(function ($stateProvider, $urlRouterProvider, $locationProvider) {
     //$urlRouterProvider.otherwise('/dashboard');
