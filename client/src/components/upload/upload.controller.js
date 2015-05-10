@@ -3,12 +3,12 @@
 angular.module('5BeatsApp')
   .controller('UploadCtrl', ['$scope', 'Songs', function ($scope, Songs) {
     $scope.message = 'Hello';
-    
+
     $scope.fileNameChanged = function() {
             console.log("*********");
-        
+
         var file = $('input[type="file"]')[0].files[0];
-        
+
           var reader = new FileReader();
 
           reader.onload = function(e) {
@@ -22,7 +22,7 @@ angular.module('5BeatsApp')
               var artist = dv.getString(30, dv.tell());
               var album = dv.getString(30, dv.tell());
               var year = dv.getString(4, dv.tell());
-                
+
                 var songURL = "media/music/" + file.name;
                 // Post new upload to database
                 Songs.postUpload(songURL, title, artist, "554e5dc1ffc17f2666ba527b", true).success(function(data){
@@ -31,7 +31,7 @@ angular.module('5BeatsApp')
                 .error(function(data){
                     console.log(data.message);
                 });
-                
+
             } else {
               // no ID3v1 data found.
             }
