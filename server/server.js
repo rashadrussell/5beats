@@ -2,13 +2,53 @@
 var express = require('express');
 var mongoose = require('mongoose');
 var bodyParser = require('body-parser');
+var requests = require('request');
+var MD5 = require("crypto-js/md5");
 var router = express.Router();
+//returns and array that contains the [0]=release-date [1]=album_name [2]=genre
+function request_by_title(track){
+      track=track.replace(/ /g, "+");
+var apikey='9d9tr5q54gdzr2mhnquenb4e';
+    var shared='5nJFQnqejy';
+    var seconds=Math.round(new Date().getTime()/1000);
+    var key=apikey+shared+seconds.toString();
+    var sig=MD5(key);
+requests('http://api.rovicorp.com/data/v1.1/song/info?apikey=9d9tr5q54gdzr2mhnquenb4e&sig='+sig+'&track='+track+'&include=appearances', function (error, response, body) {
+  if (!error && response.statusCode == 200) {
+    var dataholder=[];
+		var obj=JSON.parse(body);
+    dataholder.push(obj.song.appearances[0].year);
+    dataholder.push(obj.song.appearances[0].title);
+		return getGenre(obj.song.appearances[0].title,dataholder);
+  }
+})
+}
+//gets genre from album title
+function getGenre(album_title, data){
+  console.log(album_title);
+  album_title=album_title.replace(/ /g, "+");
+var apikey='9d9tr5q54gdzr2mhnquenb4e';
+var shared='5nJFQnqejy';
+var seconds=Math.round(new Date().getTime()/1000);
+var key=apikey+shared+seconds.toString();
+var sig=MD5(key);
+requests('http://api.rovicorp.com/search/v2.1/music/search?apikey=9d9tr5q54gdzr2mhnquenb4e&sig='+sig+'&query='+album_title+'&entitytype=album&size=1', function (error, response, body) {
+if (!error && response.statusCode == 200) {
+
+var obj=JSON.parse(body);
+console.log(obj.searchResponse.results[0].album.genres[0].name);
+data.push(obj.searchResponse.results[0].album.genres[0].name);
+return data;
+}
+})
+
+}
+//sample request to show function works
 
 //replace this with your Mongolab URL
 mongoose.connect('mongodb://admin:admin@ds031962.mongolab.com:31962/5beats');
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
-
 var songSchema = mongoose.Schema({
 	title:  		{type: String, required: true},
 	artist: 		{type: String, required: true},
@@ -82,7 +122,6 @@ var userLookupRoute = router.route('/users/:objectid');
 var songLookupRoute = router.route('/songs/:objectid');
 var messageLookupRoute = router.route('/messages/:objectid');
 var friendLookupRoute = router.route('/friends/:objectid');
-
 //General purpose callbacks
 
 function onSave(res) {
@@ -231,7 +270,7 @@ function updateItem(req, res, schema){
 
 // Start the server
 app.listen(port);
-console.log('Server running on port ' + port); 
+console.log('Server running on port ' + port);
 
 
 
@@ -392,10 +431,4 @@ friendLookupRoute.put(function(req, res){
 	console.log("Got PUT for /friends/"+req.params.objectid);
 	updateItem(req, res, Friend);
 });
-
-
-
-
-
-
-
+console.log(request_by_title("Drunk in Love"));
