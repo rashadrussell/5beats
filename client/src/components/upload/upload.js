@@ -8,7 +8,8 @@ angular.module('5BeatsApp')
         templateUrl: 'components/profile/profile.html',
         controller: 'UploadCtrl',
         data: {
-        	css: 'assets/stylesheets/components/upload/upload.css'
+        	css: 'assets/stylesheets/components/upload/scss/upload.css'
         }
       });
+
   });
