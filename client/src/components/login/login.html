@@ -1,0 +1,71 @@
+<div class="row">
+    <div class="small-12 columns">
+        <h1>Login</h1>
+        <h2 class="subheader">Please Sign In</h2> 
+    </div>
+</div>
+
+<div class="row">
+    <div class="small-12 columns">
+        <form action="/login" method="post">
+            <div>
+                <label>Username:</label>
+                <input type="text" name="username"/>
+            </div>
+            <div>
+                <label>Password:</label>
+                <input type="password" name="password"/>
+            </div>
+            <div>
+                <input type="submit" class="button" value="Log In"/>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="row">
+    <div class="small-12 columns">
+        <p></p>
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="small-12 columns">
+        <h1>Sign Up</h1>
+         <a class="button success" href="#" data-reveal-id="createNewUserModal">Create New Account</a>
+    </div>
+</div>
+
+<div id="createNewUserModal" class="reveal-modal" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
+    <h2 id="modalTitle">Create New User</h2>
+    <p class="lead">Please fill in all fields.</p>
+    <a class="close-reveal-modal" aria-label="Close" data-reveal>&#215;</a>
+    <div class="row">
+        <div class="small-12 columns">
+            <form action="/login" method="post" class="createUser" data-abide>
+                <div class="username-field">
+                    <label>Username <small>required</small>
+                        <input type="text" name="username" placeholder="Enter Username..." required>
+                        <small class="error">Username is required.</small>
+                    </label>
+                </div>
+                
+                <div class="password-field">
+                    <label>Password <small>required</small>
+                        <input type="password" name="password" required>
+                        <small class="error">Password is required.</small>
+                    </label>
+                </div>
+                
+                <div class="email-field">
+                    <label>Email <small>required</small>
+                        <input type="email" name="email" required>
+                        <small class="error">Valid email is required.</small>
+                    </label>
+                </div>
+                <button type="submit" value="Submit">Create</button>
+            </form>
+        </div>
+    </div>
+</div>

@@ -2,7 +2,9 @@
 
 angular.module('5BeatsApp', [
   'ui.router',
-  'uiRouterStyles'
+  'uiRouterStyles',
+    '5BeatsServices',
+    'flow'
 ])
   .config(function ($stateProvider, $urlRouterProvider, $locationProvider) {
     //$urlRouterProvider.otherwise('/dashboard');
@@ -11,5 +13,13 @@ angular.module('5BeatsApp', [
 	  enabled: true,
 	  requireBase: false
 	});
+    
+})
+.run(function($rootScope) {
+    $rootScope.$on('$viewContentLoaded', function () {
+        $(document).foundation();
+    });
 });
+
+
 
