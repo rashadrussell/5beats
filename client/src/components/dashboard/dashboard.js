@@ -11,4 +11,5 @@ angular.module('5BeatsApp')
         	css: 'assets/stylesheets/components/dashboard/scss/dashboard.css'
         }
       });
+
   });
