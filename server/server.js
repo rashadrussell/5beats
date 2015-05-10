@@ -17,7 +17,8 @@ var songSchema = mongoose.Schema({
 	year: 			{type: Number, required:false},
 	trackNumber: 	{type: Number, required: false, default:0},
 	uploaderID: 	{type: String, required: true},
-	isPublic: 		{type: Boolean, required: true}
+	isPublic: 		{type: Boolean, required: true},
+	albumArtURL:  	{type: String, required: false, default: ''}
 });
 
 
