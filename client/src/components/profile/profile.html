@@ -1,1 +1,146 @@
-<h1>Profile</h1>
+<div class="row">
+    <div class="small-12 columns">
+        <h1>Profile Page</h1>
+        <h2>{{selectedUser.userName}}</h2>
+        <div class="row">
+            <div class="small-6 columns">
+                <h4 class="subheader">Email</h4>        
+            </div>
+            <div class="small-6 columns">
+                <h4>{{selectedUser.email}}</h4>        
+            </div>
+        </div>
+    </div>
+    
+    <div class="small-4 columns">
+        <h2 class="subheader">
+            <img width="250" height="250" src="{{selectedUser.imageURL}}">
+        </h2>
+    </div>
+    <div class="small-8 columns">
+       <div class="row">
+           <div class="small-8 columns">
+                <h2 class="subheader">Bio</h2>       
+           </div>
+           <div class="small-4 columns">
+                <a class="button success" href="#" data-reveal-id="editBioModal">Edit</a>       
+           </div>
+        </div>
+        <div class="panel">
+            <p>Vivamus tempor purus vitae sapien facilisis blandit. Suspendisse maximus nisl ac fringilla condimentum. Nulla a justo ullamcorper, tristique justo non, feugiat massa. In ultricies dictum nulla ut faucibus. Nullam posuere id arcu non cursus. Aliquam molestie orci ac lacinia placerat. Phasellus porttitor, nulla sit amet interdum ornare, diam urna porta risus, id hendrerit lectus mi eget erat. Nullam aliquam porttitor nisi, in faucibus odio tempus id.</p>
+        </div>
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="small-4 columns">
+        <h2>Friends</h2>
+           
+          <div class="row">
+               <div class="small-6 columns">
+                   <h4 class="subheader">Name</h4>
+               </div>
+               <div class="small-6 columns">
+                   <h4 class="subheader">Email</h4>
+               </div>
+           </div>
+           
+            <ul class="no-bullet">
+                <li ng-repeat="user in dummyUsers">
+                    <div class="row">
+                        <div class="small-6 columns">
+                            <a ng-click="setUser(user)" ng-href="#"><h5 class="link">{{user.username}}</h5></a>
+                        </div>
+
+                        <div class="small-6 columns">
+                            <h5>{{user.email}}</h5>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+    </div>
+    
+    <div class="small-8 columns">
+        <h2>Public Uploads</h2>
+           
+           <div class="row">
+               <div class="small-6 columns">
+                   <h4 class="subheader">Title</h4>
+               </div>
+               <div class="small-6 columns">
+                   <h4 class="subheader">Artist</h4>
+               </div>
+           </div>
+           
+            <ul class="no-bullet">
+                <li ng-repeat="song in publicUploads">
+                    <div class="row">
+                        <div class="small-6 columns">
+                            <a ng-click="playSong(song)" ng-href="#"><h5 class="link">{{song.title}}</h5></a>
+                        </div>
+
+                        <div class="small-6 columns">
+                            <h5>{{song.artist}}</h5>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="small-12 columns">
+                            <audio controls>
+                              <source src="{{song.songURL}}" type="audio/mpeg">
+                            Your browser does not support the audio element.
+                            </audio>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+    </div>
+</div>
+
+
+<div class="row privateUploads">
+    <div class="small-12 columns">
+        <h2>Private Uploads</h2>
+           <div class="row">
+               <div class="small-6 columns">
+                   <h4 class="subheader">Title</h4>
+               </div>
+               <div class="small-6 columns">
+                   <h4 class="subheader">Artist</h4>
+               </div>
+           </div>
+           
+           <ul class="no-bullet">
+                <li ng-repeat="song in dummyPrivateUploads">
+                    <div class="row">
+                        <div class="small-6 columns">
+                            <a ng-click="playSong(song)" ng-href="#"><h5 class="link">{{song.title}}</h5></a>
+                        </div>
+
+                        <div class="small-6 columns">
+                            <h5>{{song.artist}}</h5>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+    </div>
+</div>
+
+
+<div id="editBioModal" class="reveal-modal" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
+    <h2 id="modalTitle">Edit Bio</h2>
+    <p class="lead">Please edit your bio!</p>
+    <a class="close-reveal-modal" aria-label="Close" data-reveal>&#215;</a>
+    <div class="row">
+        <div class="small-12 columns">
+            <form class="editBio">
+                <div class="bio-field">
+                    <label>Bio
+                        <textarea name="bio" placeholder="Enter Bio..."></textarea>
+                    </label>
+                </div>
+                <button type="submit" value="Submit">Save Bio</button>
+            </form>
+        </div>
+    </div>
+</div>
