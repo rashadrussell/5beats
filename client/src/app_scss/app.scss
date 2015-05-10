@@ -6,17 +6,28 @@
 @import "../shared/directives/musicList/musicList";
 @import "../shared/directives/musicWidget/musicWidget";
 
-iframe.mainView {
+iframe.mainFrame {
 	width: 80%;
 	height: 100%;
 	border: none;
 }
 
-.music-widget {
-	width: 20%;
+main.viewLoader {
+	min-width: 500px;
+	height: 100%;
+	margin: 0 0 0 250px;
+	overflow: scroll;
+}
+
+.music-widget-sidebar {
+	min-width: 20%;
 	height: 100%;
 	position:fixed;
 	top: 0;
 	right: 0;
+	background: $darkGrey;
+	box-shadow: 0px 0px 10px $black;
 }
+
+
 
