@@ -50,23 +50,23 @@ mongoose.connect('mongodb://admin:admin@ds031962.mongolab.com:31962/5beats');
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 var songSchema = mongoose.Schema({
+	songURL: 		{type: String, required: true, unique: true},
 	title:  		{type: String, required: true},
 	artist: 		{type: String, required: true},
-	album: 		{type: String, required: false, default:''},
-	releaseDate: 	{type: Date, required:false},
+	album: 			{type: String, required: false, default:'Unknown Album'},
+	year: 			{type: Number, required:false},
 	trackNumber: 	{type: Number, required: false, default:0},
 	uploaderID: 	{type: String, required: true},
-	isPublic: 	{type: Boolean, required: true}
+	isPublic: 		{type: Boolean, required: true},
+	albumArtURL:  	{type: String, required: false, default: ''}
 });
 
 
 var userSchema = mongoose.Schema({
 	userName: 		{type: String, required:true, unique:true},
-	imageURL: 		{type: String, required:false},
+	imageURL: 		{type: String, required:false, default: ''},
 	email: 			{type: String, required:true, unique:true}
 });
-
-
 
 var messageSchema = mongoose.Schema({
 	sourceUserID: 	{type: String, required: true},
@@ -80,10 +80,18 @@ var friendSchema = mongoose.Schema({
 	user2:  {type:String, required: true}
 });
 
+var playlistSchema = mongoose.Schema({
+	name: 			{type:String, required: true},
+	songs:  		{type: [String], required: true},
+	ownerID: 		{type:String, required:true}
+});
+
+
 var Song = mongoose.model('Songs', songSchema);
 var User = mongoose.model('Users', userSchema);
 var Message = mongoose.model('Messages', messageSchema);
 var Friend = mongoose.model('Friends', friendSchema);
+var Playlist = mongoose.model('Playlist', playlistSchema);
 
 // Create our Express application
 var app = express();
@@ -117,11 +125,14 @@ var usersRoute = router.route('/users');
 var songsRoute = router.route('/songs');
 var messagesRoute = router.route('/messages');
 var friendsRoute = router.route('/friends');
+var playlistsRoute = router.route('/playlists');
 
 var userLookupRoute = router.route('/users/:objectid');
 var songLookupRoute = router.route('/songs/:objectid');
 var messageLookupRoute = router.route('/messages/:objectid');
 var friendLookupRoute = router.route('/friends/:objectid');
+var playlistsLookupRoute = router.route('/playlists/:objectid');
+
 //General purpose callbacks
 
 function onSave(res) {
@@ -296,6 +307,11 @@ friendsRoute.options(function(req, res){
 	res.end();
 });
 
+playlistsRoute.options(function(req, res){
+	res.writeHead(200);
+	res.end();
+});
+
 userLookupRoute.options(function(req, res){
 	res.writeHead(200);
 	res.end();
@@ -312,6 +328,11 @@ messageLookupRoute.options(function(req, res){
 });
 
 friendLookupRoute.options(function(req, res){
+	res.writeHead(200);
+	res.end();
+});
+
+playlistsLookupRoute.options(function(req, res){
 	res.writeHead(200);
 	res.end();
 });
@@ -343,6 +364,13 @@ friendsRoute.post(function(req, res){
 	newFriend.save(onSave(res));
 });
 
+playlistsRoute.post(function(req, res){
+	console.log("Got POST for /playlists");
+	req.body.songs = JSON.parse(req.body.songs);
+	var newPlaylist = new Playlist(req.body);
+	newPlaylist.save(onSave(res));
+});
+
 //GET Methods (many results)
 
 usersRoute.get(function(req, res){
@@ -363,6 +391,11 @@ messagesRoute.get(function(req, res){
 friendsRoute.get(function(req, res){
 	console.log("Got GET for /friends");
 	getAndFilterResults(req, res, Friend);
+});
+
+playlistsRoute.get(function(req, res){
+	console.log("Got GET for /playlists");
+	getAndFilterResults(req, res, Playlist);
 });
 
 
@@ -388,6 +421,11 @@ friendLookupRoute.get(function(req, res){
 	lookupItem(req, res, Friend);
 });
 
+playlistsLookupRoute.get(function(req, res){
+	console.log("Got GET for /playlists/"+req.params.objectid);
+	lookupItem(req, res, Playlist);
+});
+
 //DELETE methods
 
 userLookupRoute.delete(function(req, res){
@@ -410,6 +448,11 @@ friendLookupRoute.delete(function(req, res){
 	deleteItem(req, res, Friend);
 });
 
+playlistsLookupRoute.delete(function(req, res){
+	console.log("Got DELETE for /playlists/"+req.params.objectid);
+	deleteItem(req, res, Playlist);
+});
+
 //PUT methods
 
 userLookupRoute.put(function(req, res){
@@ -430,4 +473,10 @@ messageLookupRoute.put(function(req, res){
 friendLookupRoute.put(function(req, res){
 	console.log("Got PUT for /friends/"+req.params.objectid);
 	updateItem(req, res, Friend);
+});
+
+playlistsLookupRoute.put(function(req, res){
+	console.log("Got PUT for /playlists/"+req.params.objectid);
+	req.body.songs = JSON.parse(req.body.songs);
+	updateItem(req, res, Playlist);
 });
