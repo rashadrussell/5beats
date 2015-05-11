@@ -6,7 +6,8 @@ var requests = require('request');
 var MD5 = require("crypto-js/md5");
 var mongoose = require('mongoose');
 var router = express.Router();
-
+var cookieParser=require('cookie-parser');
+var session=require('express-session');
 var passport = require('passport')
   , LocalStrategy = require('passport-local').Strategy;
 
@@ -127,6 +128,8 @@ var allowCrossDomain = function(req, res, next) {
 	res.header("Access-Control-Allow-Methods", "GET, POST, PUT, OPTIONS, DELETE");
 	next();
 };
+app.use(cookieParser());
+app.use(session({secret: 'key',resave:false,saveUninitialized:true}));
 app.use(allowCrossDomain);
 
 // Use the body-parser package in our application
@@ -138,6 +141,12 @@ app.use(bodyParser.urlencoded({
 
 // All our routes will start with /api
 app.use('/api', router);
+
+// app.use(session({
+//   secret: 'keyboard cat',
+//   resave: false,
+//   saveUninitialized: true
+// }));
 
 //Default route here
 var homeRoute = router.route('/');
@@ -370,15 +379,22 @@ playlistsLookupRoute.options(function(req, res){
 });
 
 function storesessionvar(username,req,res){
+  console.log('here');
   req.session.username=username;
+  //sess.username=username;
+  console.log(req.session.username);
+  //res.redirect("http://localhost:3000/login");
+  res.json({username:req.session.username});
+
 }
 //POST Methods
 loginRoute.post(function(req,res){
   console.log(req.body.username);
   console.log(req.body.password);
-  if(req.body.username !=  '' )
+  console.log(req.session);
+  if(User.findOne({userName:req.body.username}) !=  '' )
   {
-    res.redirect("http://localhost:3000/dashboard");
+    storesessionvar(req.body.username,req,res);
   }
   passport.authenticate('local', { successRedirect: '/login',
                                      failureRedirect: '/dashboard',
