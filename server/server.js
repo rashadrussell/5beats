@@ -155,9 +155,8 @@ var friendLookupRoute = router.route('/friends/:objectid');
 var playlistsLookupRoute = router.route('/playlists/:objectid');
 var loginRoute=router.route('/login');
 //General purpose callbacks
-loginRoute.post(function(res,req){
-  console.log('hello');
-  });
+
+
 // router.route('/login').post(function(res,req){
 //   console.log("i am being called");
 //   passport.authenticate('local', { successRedirect: '/dashboard',
@@ -315,6 +314,10 @@ console.log('Server running on port ' + port);
 
 
 //OPTIONS fields
+loginRoute.options(function(req, res){
+	res.writeHead(200);
+	res.end();
+});
 
 usersRoute.options(function(req, res){
 	res.writeHead(200);
@@ -366,9 +369,21 @@ playlistsLookupRoute.options(function(req, res){
 	res.end();
 });
 
-
+function storesessionvar(username,req,res){
+  req.session.username=username;
+}
 //POST Methods
-
+loginRoute.post(function(req,res){
+  console.log(req.body.username);
+  console.log(req.body.password);
+  if(req.body.username !=  '' )
+  {
+    res.redirect("http://localhost:3000/dashboard");
+  }
+  passport.authenticate('local', { successRedirect: '/login',
+                                     failureRedirect: '/dashboard',
+                                    failureFlash: true });
+});
 usersRoute.post(function(req, res){
 	console.log("Got POST for /users");
 	var newUser = new User(req.body);
@@ -429,8 +444,9 @@ playlistsRoute.get(function(req, res){
 
 
 //Get Methods (single result)
-
-userLookupRoute.get(function(req, res){
+loginRoute.get(function(res,req){
+  console.log('hello');
+});userLookupRoute.get(function(req, res){
 	console.log("Got GET for /users/"+req.params.objectid);
 	lookupItem(req, res, User);
 });
