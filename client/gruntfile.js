@@ -57,9 +57,6 @@ module.exports = function(grunt) {
                 ],
         tasks: [
                   'compass:app',
-                  'compass:components',
-                  'compass:shared',
-                  'compass:foundation'
                 ]
       }, //sass_app
       sass_components: {
@@ -68,7 +65,6 @@ module.exports = function(grunt) {
                 ],
         tasks: [
                   'compass:components',
-                  'compass:app'
                 ]
       }, //sass_components
       sass_foundation: {
@@ -81,11 +77,10 @@ module.exports = function(grunt) {
       }, //sass_foundation
       shared: {
         files: [
-                 'src/shared/**/*.scss',
+                 'src/shared/**/*.scss'
                ],
         tasks: [
                  'compass:shared',
-                 'compass:app'
                ]
       }, //sass_shared
       html: {

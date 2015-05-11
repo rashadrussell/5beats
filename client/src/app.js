@@ -3,11 +3,12 @@
 angular.module('5BeatsApp', [
   'ui.router',
   'uiRouterStyles',
-  '5BeatsServices',
-  'flow'
+    '5BeatsServices',
+    'flow'
 ])
   .config(function ($stateProvider, $urlRouterProvider, $locationProvider) {
-    $urlRouterProvider.otherwise('/dashboard');
+    $urlRouterProvider
+      .otherwise('/');
 
     $locationProvider.html5Mode({
 	  enabled: true,
@@ -19,11 +20,6 @@ angular.module('5BeatsApp', [
     $rootScope.$on('$viewContentLoaded', function () {
         $(document).foundation();
     });
-    $rootScope.musicQueue = [];
-    $rootScope.addToQueue = function(song) {
-        $rootScope.musicQueue.push(song);
-    }
-    
 });
 
 

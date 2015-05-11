@@ -5,10 +5,9 @@ angular.module('5BeatsApp')
     $scope.message = 'Hello';
 
     $scope.fileNameChanged = function() {
+            console.log("*********");
 
-        var file = $('input[type="file"]')[0].files[0],
-            albumArtURL = $('.coverArtURL').val(),
-            formTitle = $('.songTitle').val();
+        var file = $('input[type="file"]')[0].files[0];
 
           var reader = new FileReader();
 
@@ -19,15 +18,14 @@ angular.module('5BeatsApp')
             // See http://en.wikipedia.org/wiki/ID3
             if (dv.getString(3, dv.byteLength - 128) == 'TAG') {
               var title = dv.getString(30, dv.tell());
+                console.log(title);
               var artist = dv.getString(30, dv.tell());
               var album = dv.getString(30, dv.tell());
               var year = dv.getString(4, dv.tell());
 
-              title = formTitle || "No Title";
-
                 var songURL = "media/music/" + file.name;
                 // Post new upload to database
-                Songs.postUpload(songURL, albumArtURL, title, artist, "554e5dc1ffc17f2666ba527b", true).success(function(data){
+                Songs.postUpload(songURL, title, artist, "554e5dc1ffc17f2666ba527b", true).success(function(data){
                     var uploadedFileID = data.data._id;
 
                     var fileSelect = document.getElementById('fileSelector');

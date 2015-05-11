@@ -5,12 +5,22 @@ angular.module('5BeatsServices', [])
             //// method to get all users in database
             getAllUsers : function(){
                 var baseUrl = 'http://localhost:4000/api/users';
-                return $http.get(baseUrl);
+                // Build http request
+                var req = {
+                    method: 'GET',
+                    url: baseUrl
+                }
+                return $http(req);
             },
             //// method to get specific user (param: id)
             getUser : function(id){
                 var baseUrl = 'http://localhost:4000/api/users/'+id;
-                return $http.get(baseUrl);
+                // Build http request
+                var req = {
+                    method: 'GET',
+                    url: baseUrl
+                }
+                return $http(req);
             }
         }
     })
@@ -19,31 +29,36 @@ angular.module('5BeatsServices', [])
         return{
             //// method to get public uploads of specific user (param: id)
             getUploads : function(userid, isPublic){
-                var baseUrl
-                if(!userid) {
-                    baseUrl = 'http://localhost:4000/api/songs';
-                } else {
-                    baseUrl = 'http://localhost:4000/api/songs?where={"uploaderID": "'+userid+'","isPublic":'+isPublic+'}';
+                var baseUrl = 'http://localhost:4000/api/songs?where={"uploaderID": "'+userid+'","isPublic":'+isPublic+'}';
+                console.log("URLLLL!!: "+baseUrl);
+                // Build http request
+                var req = {
+                    method: 'GET',
+                    url: baseUrl
                 }
-
-                return $http.get(baseUrl);
+                return $http(req);
             },
-            postUpload : function(songURL, albumArtURL, title, artist, uploaderID, isPublic){
+            postUpload : function(songURL, title, artist, uploaderID, isPublic){
+                console.log("title: " + title);
+                console.log("artist: " + artist);
                 var baseUrl = 'http://localhost:4000/api/songs';
+                console.log("POSTURL: " + baseUrl);
                 var song = {
                     songURL: songURL,
                     title: title.replace(/\0/g, ''),
                     artist: artist.replace(/\0/g, ''),
                     uploaderID: uploaderID,
-                    albumArtURL: albumArtURL,
                     isPublic: isPublic
                 };
+                console.log(song);
                 // Build http request
                 var req = {
                     method: 'POST',
                     url: baseUrl,
                     data: song
                 };
+                console.log(req);
+                console.log("POST DATA: " + JSON.stringify(req.data));
                 return $http(req);
             }
         }
