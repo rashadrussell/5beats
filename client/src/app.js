@@ -19,6 +19,11 @@ angular.module('5BeatsApp', [
     $rootScope.$on('$viewContentLoaded', function () {
         $(document).foundation();
     });
+    $rootScope.musicQueue = [];
+    $rootScope.addToQueue = function(song) {
+        $rootScope.musicQueue.push(song);
+    }
+    
 });
 
 
