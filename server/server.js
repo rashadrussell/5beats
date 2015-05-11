@@ -5,6 +5,7 @@ var bodyParser = require('body-parser');
 var requests = require('request');
 var MD5 = require("crypto-js/md5");
 var router = express.Router();
+var multer  = require('multer');
 //returns and array that contains the [0]=release-date [1]=album_name [2]=genre
 function request_by_title(track){
       track=track.replace(/ /g, "+");
@@ -114,9 +115,12 @@ app.use(bodyParser.urlencoded({
 	extended: true
 }));
 
+app.use('/uploads', express.static('uploads'));
 
 // All our routes will start with /api
 app.use('/api', router);
+
+
 
 //Default route here
 var homeRoute = router.route('/');
@@ -132,6 +136,8 @@ var songLookupRoute = router.route('/songs/:objectid');
 var messageLookupRoute = router.route('/messages/:objectid');
 var friendLookupRoute = router.route('/friends/:objectid');
 var playlistsLookupRoute = router.route('/playlists/:objectid');
+
+var uploadRoute = router.route('/upload');
 
 //General purpose callbacks
 
@@ -337,6 +343,11 @@ playlistsLookupRoute.options(function(req, res){
 	res.end();
 });
 
+uploadRoute.options(function(req, res){
+	res.writeHead(200);
+	res.end();
+});
+
 
 //POST Methods
 
@@ -370,6 +381,21 @@ playlistsRoute.post(function(req, res){
 	var newPlaylist = new Playlist(req.body);
 	newPlaylist.save(onSave(res));
 });
+
+uploadRoute.post([ multer({ dest: './uploads/'}), function(req, res){
+  var path = req.files.songs.path;
+  console.log(req.query.objectid);
+  Song.update({_id: req.query.objectid}, {$set: {songURL: path}}, function(err, object){
+		if(err){
+      console.log("ERROR IN UPDATING SONG URL");
+			res.status(500);
+			res.json({message: String(err), data:[]});
+		}
+		else{
+      res.status(201);
+		}
+	});
+}]);
 
 //GET Methods (many results)
 

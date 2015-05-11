@@ -26,7 +26,30 @@ angular.module('5BeatsApp')
                 var songURL = "media/music/" + file.name;
                 // Post new upload to database
                 Songs.postUpload(songURL, title, artist, "554e5dc1ffc17f2666ba527b", true).success(function(data){
-                    console.log(data.message);
+                    var uploadedFileID = data.data._id;
+
+                    var fileSelect = document.getElementById('fileSelector');
+
+                    var files = fileSelect.files;
+
+                    var formData = new FormData();
+                    for (var i = 0; i < files.length; i++) {
+                      var file = files[i];
+                      console.log(file);
+                      formData.append('songs', file, file.name);
+                    }
+
+                    var ajaxRequest = new XMLHttpRequest();
+                    ajaxRequest.open('POST', 'http://localhost:4000/api/upload?objectid='+uploadedFileID, true);
+                    ajaxRequest.onload = function () {
+                      if (ajaxRequest.status === 201) {
+                        console.log("Upload complete!");
+                      } else {
+                        alert('An error occurred!');
+                      }
+                    };
+                    console.log(formData);
+                    ajaxRequest.send(formData);
                 })
                 .error(function(data){
                     console.log(data.message);

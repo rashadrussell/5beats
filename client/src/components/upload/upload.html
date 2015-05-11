@@ -9,17 +9,24 @@
 <div class="row">
     <div class="small-12 columns">
         <h2 class="subheader">Choose file to upload</h2>
-        <input type="file" id="file-select" name="song"/>
+        <input type="file" id="fileSelector" name="song"/>
         <label>Choose Song Visibility</label>
         <button ng-click="fileNameChanged()">Upload</button>
     </div>
 </div>
 
 
-<!--
-<div class="row">
+<!-- <form action="http://localhost:4000/api/upload" method="post" enctype="multipart/form-data" id="file-form">
+    Select image to upload:
+    <input type="file" name="fileToUpload" id="file-select">
+    <input type="submit" value="Upload Image" name="upload-button">
+</form> -->
+
+
+
+<!-- <div class="row">
     <div class="small-12 columns">
-        <div flow-init="{target: '/upload'}"
+        <div flow-init="{target: '/api/upload'}"
              flow-files-submitted="$flow.upload()">
 
           <input type="file" flow-btn/>
@@ -32,13 +39,6 @@
                 <td>{{file.name}}</td>
             </tr>
           </table>
-        </div>       
+        </div>
     </div>
-</div>
--->
-
-
-
-
-
-
+</div> -->

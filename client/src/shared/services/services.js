@@ -4,7 +4,7 @@ angular.module('5BeatsServices', [])
         return{
             //// method to get all users in database
             getAllUsers : function(){
-                var baseUrl = 'http://45.55.177.207:4000/api/users';
+                var baseUrl = 'http://localhost:4000/api/users';
                 // Build http request
                 var req = {
                     method: 'GET',
@@ -14,7 +14,7 @@ angular.module('5BeatsServices', [])
             },
             //// method to get specific user (param: id)
             getUser : function(id){
-                var baseUrl = 'http://45.55.177.207:4000/api/users/'+id;
+                var baseUrl = 'http://localhost:4000/api/users/'+id;
                 // Build http request
                 var req = {
                     method: 'GET',
@@ -29,7 +29,7 @@ angular.module('5BeatsServices', [])
         return{
             //// method to get public uploads of specific user (param: id)
             getUploads : function(userid, isPublic){
-                var baseUrl = 'http://45.55.177.207:4000/api/songs?where={"uploaderID": "'+userid+'","isPublic":'+isPublic+'}';
+                var baseUrl = 'http://localhost:4000/api/songs?where={"uploaderID": "'+userid+'","isPublic":'+isPublic+'}';
                 console.log("URLLLL!!: "+baseUrl);
                 // Build http request
                 var req = {
@@ -41,7 +41,7 @@ angular.module('5BeatsServices', [])
             postUpload : function(songURL, title, artist, uploaderID, isPublic){
                 console.log("title: " + title);
                 console.log("artist: " + artist);
-                var baseUrl = 'http://45.55.177.207:4000/api/songs';
+                var baseUrl = 'http://localhost:4000/api/songs';
                 console.log("POSTURL: " + baseUrl);
                 var song = {
                     songURL: songURL,
