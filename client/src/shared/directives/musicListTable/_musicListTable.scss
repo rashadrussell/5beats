@@ -1,0 +1,94 @@
+.music-list-table {
+	width: 100%;
+	background: transparent;
+	border: none;
+	border-collapse: collapse;
+
+	.music-headers {
+		padding: 10px 10px 0px 20px;
+		border-bottom: solid 1px $dust;
+		background: transparent;
+
+		.music-header {
+			color: $dust;
+		}
+
+		.music-header:not(:last-child) {
+			margin-right: 20%;
+		}
+
+		tr th:first-child {
+			padding-left: 20px;
+		}
+	}
+
+	.music-list {
+		margin: 0;
+		list-style: none;
+
+		.music-row {
+			padding: 5px 5px 5px 20px;
+			background: transparent;
+
+			.music-row-item {
+				border-bottom: solid thin $dust;
+				color: $white;
+
+				.share {
+					margin-right: 10px;
+					color: $white;
+				}
+				.share:hover {
+					color: $darkGrey;
+				}
+
+				.remove {color: $red}
+				.remove:hover {
+					color: $darkRed;
+				}
+			}
+
+			.music-row-item:first-child {
+				padding-left: 20px;
+			}
+
+			.music-row-item:not(:last-child) {
+				margin-right: 20%;
+			}
+
+			.play-icon {
+				font-size: 10px;
+				margin-right: 20px;
+			}
+
+			a:hover {
+				color: $red;
+				text-decoration: none;
+			}
+
+			.uploader {
+				a:hover {
+					text-decoration: none;
+					border-bottom: solid thin $white;
+					color: $white;
+					padding-bottom: 3px;
+				}
+			}
+
+			.song {
+				a.song-title:hover {
+					text-decoration: none;
+					border-bottom: solid thin $white;
+					color: $white;
+					padding-bottom: 3px;
+				}
+			}	
+		}
+
+		.music-row:hover {
+			background: $dust;
+		}
+	}
+
+	
+}

@@ -1,0 +1,409 @@
+<div class="current-song-section">
+
+	<div class="song-cover-art-container">
+		<img class="song-cover-art" src="media/albumCoverArt/Snoop_Lion_Reincarnated.jpg" alt="Snoop Lion: Reincarnated"/>
+	</div>
+
+	<div class="current-song-controls-container">
+		<audio controls>
+			<source src="" type="audio/mpeg">
+		</audio>
+	</div>
+	
+</div>
+
+<div class="song-queue-section">
+	<table class="music-list-table" >
+		<thead class="music-headers">
+			<tr>
+				<th><h5 class="music-header">Song</h5></th>
+				<th><h5 class="music-header">Uploader</h5></th>
+				<th><h5 class="music-header">Duration</h5></th>
+			</tr>
+		</thead>
+
+		<tbody class="music-list">
+
+			<tr class="music-row" ng-repeat="song in musicQueue">
+				<td class="music-row-item song">
+					<a class="play-icon" href="#" ng-click="play(song)">
+						<i class="fa fa-play fa-lg"></i>
+					</a>
+					<a class="song-title" href="#">
+						{{song.title}}
+					</a>
+				</td>
+				<td class="music-row-item artist">
+					<a href="#">
+						{{song.artist}}
+					</a>
+				</td>
+				<td class="music-row-item uploader">
+					<a href="#">
+						{{song.uploader}}
+					</a>
+				</td>
+				<td class="music-row-item">
+					<a href="#" title="Send a Drop">
+						<span class="share"><i class="fa fa-share"></i></span>
+					</a>
+					<a href="#">
+						<span title="Remove" class="remove alert"><i class="fa fa-times"></i></span>
+					</a>
+				</td>
+			</tr>
+					
+
+		</tbody>
+	</table>
+</div>
+<!--
+<table class="music-list-table">
+
+	<tbody class="music-list">
+
+		<tr class="music-row">
+			<td class="music-row-item song">
+				<a class="play-icon" href="#">
+					<i class="fa fa-play fa-lg"></i>
+				</a>
+				<a href="#">
+					<span>
+						Blessings
+					</span>
+				</a>
+			</td>
+			<td class="music-row-item uploader">
+				<a href="#">
+					Rashad Russell
+				</a>
+			</td>
+			<td class="music-row-item duration">3:42</td>
+		</tr>
+
+		<tr class="music-row">
+			<td class="music-row-item song">
+				<a class="play-icon" href="#">
+					<i class="fa fa-play fa-lg"></i>
+				</a>
+				<a href="#">
+					<span>
+						Blessings
+					</span>
+				</a>
+			</td>
+			<td class="music-row-item uploader">
+				<a href="#">
+					Rashad Russell
+				</a>
+			</td>
+			<td class="music-row-item duration">3:42</td>
+		</tr>
+
+		<tr class="music-row">
+			<td class="music-row-item song">
+				<a class="play-icon" href="#">
+					<i class="fa fa-play fa-lg"></i>
+				</a>
+				<a href="#">
+					<span>
+						Blessings
+					</span>
+				</a>
+			</td>
+			<td class="music-row-item uploader">
+				<a href="#">
+					Rashad Russell
+				</a>
+			</td>
+			<td class="music-row-item duration">3:42</td>
+		</tr>
+
+		<tr class="music-row">
+			<td class="music-row-item song">
+				<a class="play-icon" href="#">
+					<i class="fa fa-play fa-lg"></i>
+				</a>
+				<a href="#">
+					<span>
+						Blessings
+					</span>
+				</a>
+			</td>
+			<td class="music-row-item uploader">
+				<a href="#">
+					Rashad Russell
+				</a>
+			</td>
+			<td class="music-row-item duration">3:42</td>
+		</tr>
+
+		<tr class="music-row">
+			<td class="music-row-item song">
+				<a class="play-icon" href="#">
+					<i class="fa fa-play fa-lg"></i>
+				</a>
+				<a href="#">
+					<span>
+						Blessings
+					</span>
+				</a>
+			</td>
+			<td class="music-row-item uploader">
+				<a href="#">
+					Rashad Russell
+				</a>
+			</td>
+			<td class="music-row-item duration">3:42</td>
+		</tr>
+
+		<tr class="music-row">
+			<td class="music-row-item song">
+				<a class="play-icon" href="#">
+					<i class="fa fa-play fa-lg"></i>
+				</a>
+				<a href="#">
+					<span>
+						Blessings
+					</span>
+				</a>
+			</td>
+			<td class="music-row-item uploader">
+				<a href="#">
+					Rashad Russell
+				</a>
+			</td>
+			<td class="music-row-item duration">3:42</td>
+		</tr>
+
+		<tr class="music-row">
+			<td class="music-row-item song">
+				<a class="play-icon" href="#">
+					<i class="fa fa-play fa-lg"></i>
+				</a>
+				<a href="#">
+					<span>
+						Blessings
+					</span>
+				</a>
+			</td>
+			<td class="music-row-item uploader">
+				<a href="#">
+					Rashad Russell
+				</a>
+			</td>
+			<td class="music-row-item duration">3:42</td>
+		</tr>
+
+		<tr class="music-row">
+			<td class="music-row-item song">
+				<a class="play-icon" href="#">
+					<i class="fa fa-play fa-lg"></i>
+				</a>
+				<a href="#">
+					<span>
+						Blessings
+					</span>
+				</a>
+			</td>
+			<td class="music-row-item uploader">
+				<a href="#">
+					Rashad Russell
+				</a>
+			</td>
+			<td class="music-row-item duration">3:42</td>
+		</tr>
+
+		<tr class="music-row">
+			<td class="music-row-item song">
+				<a class="play-icon" href="#">
+					<i class="fa fa-play fa-lg"></i>
+				</a>
+				<a href="#">
+					<span>
+						Blessings
+					</span>
+				</a>
+			</td>
+			<td class="music-row-item uploader">
+				<a href="#">
+					Rashad Russell
+				</a>
+			</td>
+			<td class="music-row-item duration">3:42</td>
+		</tr>
+
+		<tr class="music-row">
+			<td class="music-row-item song">
+				<a class="play-icon" href="#">
+					<i class="fa fa-play fa-lg"></i>
+				</a>
+				<a href="#">
+					<span>
+						Blessings
+					</span>
+				</a>
+			</td>
+			<td class="music-row-item uploader">
+				<a href="#">
+					Rashad Russell
+				</a>
+			</td>
+			<td class="music-row-item duration">3:42</td>
+		</tr>
+
+		<tr class="music-row">
+			<td class="music-row-item song">
+				<a class="play-icon" href="#">
+					<i class="fa fa-play fa-lg"></i>
+				</a>
+				<a href="#">
+					<span>
+						Blessings
+					</span>
+				</a>
+			</td>
+			<td class="music-row-item uploader">
+				<a href="#">
+					Rashad Russell
+				</a>
+			</td>
+			<td class="music-row-item duration">3:42</td>
+		</tr>
+
+		<tr class="music-row">
+			<td class="music-row-item song">
+				<a class="play-icon" href="#">
+					<i class="fa fa-play fa-lg"></i>
+				</a>
+				<a href="#">
+					<span>
+						Blessings
+					</span>
+				</a>
+			</td>
+			<td class="music-row-item uploader">
+				<a href="#">
+					Rashad Russell
+				</a>
+			</td>
+			<td class="music-row-item duration">3:42</td>
+		</tr>
+
+		<tr class="music-row">
+			<td class="music-row-item song">
+				<a class="play-icon" href="#">
+					<i class="fa fa-play fa-lg"></i>
+				</a>
+				<a href="#">
+					<span>
+						Blessings
+					</span>
+				</a>
+			</td>
+			<td class="music-row-item uploader">
+				<a href="#">
+					Rashad Russell
+				</a>
+			</td>
+			<td class="music-row-item duration">3:42</td>
+		</tr>
+
+		<tr class="music-row">
+			<td class="music-row-item song">
+				<a class="play-icon" href="#">
+					<i class="fa fa-play fa-lg"></i>
+				</a>
+				<a href="#">
+					<span>
+						Blessings
+					</span>
+				</a>
+			</td>
+			<td class="music-row-item uploader">
+				<a href="#">
+					Rashad Russell
+				</a>
+			</td>
+			<td class="music-row-item duration">3:42</td>
+		</tr>
+
+		<tr class="music-row">
+			<td class="music-row-item song">
+				<a class="play-icon" href="#">
+					<i class="fa fa-play fa-lg"></i>
+				</a>
+				<a href="#">
+					<span>
+						Blessings
+					</span>
+				</a>
+			</td>
+			<td class="music-row-item uploader">
+				<a href="#">
+					Rashad Russell
+				</a>
+			</td>
+			<td class="music-row-item duration">3:42</td>
+		</tr>
+
+		<tr class="music-row">
+			<td class="music-row-item song">
+				<a class="play-icon" href="#">
+					<i class="fa fa-play fa-lg"></i>
+				</a>
+				<a href="#">
+					<span>
+						Blessings
+					</span>
+				</a>
+			</td>
+			<td class="music-row-item uploader">
+				<a href="#">
+					Rashad Russell
+				</a>
+			</td>
+			<td class="music-row-item duration">3:42</td>
+		</tr>
+
+		<tr class="music-row">
+			<td class="music-row-item song">
+				<a class="play-icon" href="#">
+					<i class="fa fa-play fa-lg"></i>
+				</a>
+				<a href="#">
+					<span>
+						Blessings
+					</span>
+				</a>
+			</td>
+			<td class="music-row-item uploader">
+				<a href="#">
+					Rashad Russell
+				</a>
+			</td>
+			<td class="music-row-item duration">3:42</td>
+		</tr>
+
+		<tr class="music-row">
+			<td class="music-row-item song">
+				<a class="play-icon" href="#">
+					<i class="fa fa-play fa-lg"></i>
+				</a>
+				<a href="#">
+					<span>
+						Blessings
+					</span>
+				</a>
+			</td>
+			<td class="music-row-item uploader">
+				<a href="#">
+					Rashad Russell
+				</a>
+			</td>
+			<td class="music-row-item duration">3:42</td>
+		</tr>
+
+	</tbody>
+</table>
+-->

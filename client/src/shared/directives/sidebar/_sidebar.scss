@@ -2,8 +2,9 @@
 	/* Main Sidebar */
 	
 	.left-sidebar {
-		width: 250px;
+
 		height: 100%;
+		min-width: 220px;
 		position: fixed;
 		top: 0;
 		left: 0;
@@ -14,9 +15,23 @@
 			text-align: center;
 			margin-bottom: 20px;
 
-			button.signin {
+			a.signin {
+				padding: 5px;
+				display: block;
 				background: $red;
 				font-size: 14px;
+			}
+
+			a.signin:hover {
+				color: $white;
+				background: $darkRed;
+				text-decoration: none;
+			}
+
+			a.signin:active {
+				color: $white;
+				background: $darkRed;
+				text-decoration: none;
 			}
 		}
 
@@ -29,7 +44,7 @@
 			li {
 				margin-bottom: 20px;
 
-				a {
+				.sidebar-link {
 					display: block; 
 					padding: 15px;
 					border: solid 2px $red;
@@ -38,6 +53,7 @@
 					&:hover {
 						color: $white;
 						border-color: $white;
+						text-decoration: none;
 					}
 				}
 			}

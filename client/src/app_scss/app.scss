@@ -3,3 +3,38 @@
 @import "base";
 @import "../shared/directives/stickyHeader/stickyHeader";
 @import "../shared/directives/sidebar/sidebar";
+@import "../shared/directives/musicListTable/musicListTable";
+@import "../shared/directives/musicWidget/musicWidget";
+@import "../shared/directives/songSlider/songSlider";
+
+/*
+iframe.mainFrame {
+	width: 76%;
+	height: 100%;
+	border: none;
+	overflow: hidden;
+}
+*/
+
+main.viewLoader {
+	width: 64%;
+	min-width: 500px;
+	height: 100%;
+	padding: 56px 0px 0px 0px; 
+	margin: 0 0 0 220px;
+	overflow: hidden;
+}
+
+.music-widget-sidebar {
+	width: 300px;
+	height: 100%;
+	position:fixed;
+	top: 0;
+	right: 0;
+	background: $darkGrey;
+	box-shadow: 0px 0px 10px $black;
+	z-index: 10000;
+}
+
+
+
