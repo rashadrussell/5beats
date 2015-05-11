@@ -42,7 +42,7 @@ angular.module('5BeatsApp')
                     }
 
                     var ajaxRequest = new XMLHttpRequest();
-                    ajaxRequest.open('POST', 'http://localhost:4000/api/upload?objectid='+uploadedFileID, true);
+                    ajaxRequest.open('POST', 'http://104.236.192.103:4000/api/upload?objectid='+uploadedFileID, true);
                     ajaxRequest.onload = function () {
                       if (ajaxRequest.status === 201) {
                         console.log("Upload complete!");
