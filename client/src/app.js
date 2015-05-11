@@ -7,7 +7,7 @@ angular.module('5BeatsApp', [
   'flow'
 ])
   .config(function ($stateProvider, $urlRouterProvider, $locationProvider) {
-    //$urlRouterProvider.otherwise('/dashboard');
+    $urlRouterProvider.otherwise('/dashboard');
 
     $locationProvider.html5Mode({
 	  enabled: true,
